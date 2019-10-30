@@ -57,6 +57,8 @@ namespace Microsoft.eShopOnContainers.Services.Identity.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ConsentInputModel model)
         {
+            if (model is null) return BadRequest();
+        
             // parse the return URL back to an AuthorizeRequest object
             var request = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
             ConsentResponse response = null;
